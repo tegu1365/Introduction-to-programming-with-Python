@@ -1,5 +1,5 @@
 def calculate_final_vector(start_point, list_of_colors):
-    end_point = [start_point[0] , start_point[1]]
+    end_point = [start_point[0], start_point[1]]
 
     for color in list_of_colors:
         # up [1]+1 down [1]-1 left [0]-1 right [0]+1
@@ -23,10 +23,7 @@ def calculate_final_vector(start_point, list_of_colors):
             case 'FFFFFF':  # nop
                 continue
             case '000000':  # end
-                a = (end_point[0], end_point[1])
-                return a
+                return end_point[0], end_point[1]
             case _:  # default
-                print('Error: {0} is not valid color'.format(color))
-
-    a = (end_point[0], end_point[1])
-    return a
+                print('Error: {0} is not valid color and it is ignored'.format(color))
+    return end_point[0], end_point[1]
