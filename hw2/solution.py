@@ -16,6 +16,7 @@
 def get_letter(num, count):
     nums_chars = {-1: ('',),
                   1: ('',),
+                  0: (' ',),
                   2: ('A', 'B', 'C'),
                   3: ('D', 'E', 'F'),
                   4: ('G', 'H', 'I'),
@@ -23,8 +24,8 @@ def get_letter(num, count):
                   6: ('M', 'N', 'O'),
                   7: ('P', 'Q', 'R', 'S'),
                   8: ('T', 'U', 'V'),
-                  9: ('W', 'X', 'Y', 'Z'),
-                  0: (' ',)}
+                  9: ('W', 'X', 'Y', 'Z')
+                  }
     while count >= len(nums_chars[num]):
         count -= len(nums_chars[num])
     return nums_chars[num][count]
@@ -43,6 +44,9 @@ def nums_to_text(nums):
             # print(f"We are on {n} and c={c}")
             text += get_letter(previous, c)
             # print(text)
+            c = 0
+        elif n == 0:
+            text += get_letter(previous, c)
             c = 0
         else:
             if previous == n:
