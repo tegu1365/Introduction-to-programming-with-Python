@@ -159,6 +159,6 @@ def angles_to_nums(angles):
 
 
 def is_phone_tastic(word):
-    lenght=len(word)
-    nums=text_to_nums(word)
-    return (nums_to_angle(nums)%lenght)==0
+    length = len(word)
+    nums = text_to_nums(word)
+    return (nums_to_angle(nums) % length) == 0

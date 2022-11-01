@@ -94,5 +94,6 @@ class TestIsPhonetastic(unittest.TestCase):
     def test_false(self):
         self.assertFalse(is_phone_tastic('gods'))
 
+
 if __name__ == '__main__':
     unittest.main()
