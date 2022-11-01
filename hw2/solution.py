@@ -25,7 +25,7 @@ def get_letter(num,count):
                   8: ('T', 'U', 'V'),
                   9: ('W', 'X', 'Y', 'Z'),
                   0: (' ',)}
-    if count >= len(nums_chars[num]):
+    while count >= len(nums_chars[num]):
         count -= len(nums_chars[num])
     return nums_chars[num][count]
 

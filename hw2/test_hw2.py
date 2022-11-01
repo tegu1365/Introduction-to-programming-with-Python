@@ -11,8 +11,15 @@ class TestNumsToText(unittest.TestCase):
         """Sanity test for a single number."""
         self.assertEqual(nums_to_text([2]).lower(), 'a')
 
-    def test_Hello(self):
+    def test_hello(self):
         self.assertEqual(nums_to_text([4, 4, 3, 3, 5, 5, 5, -1, 5, 5, 5, 6, 6, 6]), 'HELLO')
+
+    def test_python(self):
+        self.assertEqual(nums_to_text([7, 9, 9, 9, 8, 4, 4, 6, 6, 6, -1, 6, 6]), 'PYTHON')
+
+    def test_single_letter(self):
+        self.assertEqual(nums_to_text([2, 2, 2, 2, 2, 2, 2, 2]), 'B')
+
 
 '''
 class TestTextToNums(unittest.TestCase):
