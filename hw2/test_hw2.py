@@ -81,7 +81,6 @@ class TestAnglesToNums(unittest.TestCase):
         self.assertEqual(angles_to_nums([16, 14, 90, -120]), [1, 3, 8])
 
 
-'''
 class TestIsPhonetastic(unittest.TestCase):
     """Test the is_phone_tastic function."""
 
@@ -89,6 +88,11 @@ class TestIsPhonetastic(unittest.TestCase):
         """Sanity test for a single letter word."""
         self.assertTrue(is_phone_tastic('a'))
 
-'''
+    def test_example(self):
+        self.assertTrue(is_phone_tastic('god'))
+
+    def test_false(self):
+        self.assertFalse(is_phone_tastic('gods'))
+
 if __name__ == '__main__':
     unittest.main()
