@@ -114,12 +114,47 @@ def normalization(angle):
 def nums_to_angle(nums):
     angle = 0
     base_angle = 30
-    angle=sum(nums)*base_angle
+    angle = sum(nums) * base_angle
     return normalization(angle)
+
+
+def round_angle(angle):
+    angle = normalization(angle)
+    if 0 <= angle <= 15:
+        return 0
+    elif 15 < angle <= 45:
+        return 30
+    elif 45 < angle <= 75:
+        return 60
+    elif 75 < angle <= 105:
+        return 90
+    elif 105 < angle <= 135:
+        return 120
+    elif 135 < angle <= 165:
+        return 150
+    elif 165 < angle <= 195:
+        return 180
+    elif 195 < angle <= 225:
+        return 210
+    elif 225 < angle <= 255:
+        return 240
+    elif 255 < angle <= 285:
+        return 270
+    elif 285 < angle <= 315:
+        return 300
+    elif 315 < angle <= 345:
+        return 330
+    else:
+        return 0
 
 
 def angles_to_nums(angles):
     nums = []
+    for a in angles:
+        a = round_angle(a)
+        if not a == 0:
+            a /= 30
+            nums.append(a)
     return nums
 
 

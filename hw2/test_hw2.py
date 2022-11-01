@@ -67,9 +67,8 @@ class TestNumsToAngles(unittest.TestCase):
         self.assertEqual(nums_to_angle([1]), 30)
 
     def test_example(self):
-        self.assertEqual(nums_to_angle([1, 5, 9]),90)
+        self.assertEqual(nums_to_angle([1, 5, 9]), 90)
 
-'''
 
 class TestAnglesToNums(unittest.TestCase):
     """Test the angles_to_nums function."""
@@ -78,7 +77,11 @@ class TestAnglesToNums(unittest.TestCase):
         """Sanity test for a single angle."""
         self.assertEqual(angles_to_nums([30]), [1])
 
+    def test_example(self):
+        self.assertEqual(angles_to_nums([16, 14, 90, -120]), [1, 3, 8])
 
+
+'''
 class TestIsPhonetastic(unittest.TestCase):
     """Test the is_phone_tastic function."""
 
