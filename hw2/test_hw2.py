@@ -27,10 +27,13 @@ class TestNumsToText(unittest.TestCase):
         self.assertEqual(nums_to_text([2, 2, 1, 1, 2, 1]), 'BA')
 
     def test_multi_intervals(self):
-        self.assertEqual(nums_to_text([0, 0, 0, 0, 0, 0, 0]), '       ')
+        self.assertEqual(nums_to_text([0, 0, 0, 0, 0, 0, 0]), ' ')
 
     def test_multi_pass(self):
         self.assertEqual(nums_to_text([1, 2, 1, 1, 1, 2]), 'AA')
+
+    def test_multi_wait(self):
+        self.assertEqual(nums_to_text([1, 2, -1, -1, 2, 1, 2]), 'AAA')
 
 
 class TestTextToNums(unittest.TestCase):
@@ -49,11 +52,12 @@ class TestTextToNums(unittest.TestCase):
     def test_interval(self):
         self.assertEqual(text_to_nums('asl pls'), [2, 7, 7, 7, 7, 5, 5, 5, 0, 7, 5, 5, 5, 7, 7, 7, 7])
 
+    def test_multi_interval(self):
+        self.assertEqual(text_to_nums('   '), [0, -1, 0, -1, 0])
+
     def test_multi_letter(self):
         self.assertEqual(text_to_nums('aAaA Bbb'), [2, -1, 2, -1, 2, -1, 2, 0, 2, 2, -1, 2, 2, -1, 2, 2])
 
-
-'''       
 
 class TestNumsToAngles(unittest.TestCase):
     """Test the nums_to_angle function."""
@@ -62,6 +66,10 @@ class TestNumsToAngles(unittest.TestCase):
         """Sanity test for a single number."""
         self.assertEqual(nums_to_angle([1]), 30)
 
+    def test_example(self):
+        self.assertEqual(nums_to_angle([1, 5, 9]),90)
+
+'''
 
 class TestAnglesToNums(unittest.TestCase):
     """Test the angles_to_nums function."""

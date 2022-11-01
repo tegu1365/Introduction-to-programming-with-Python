@@ -45,9 +45,6 @@ def nums_to_text(nums):
             text += get_letter(previous, c)
             # print(text)
             c = 0
-        elif n == 0:
-            text += get_letter(previous, c)
-            c = 0
         else:
             if previous == n:
                 c += 1
@@ -106,9 +103,19 @@ def text_to_nums(text):
     return nums
 
 
+def normalization(angle):
+    while angle > 359:
+        angle -= 360
+    while angle < 0:
+        angle += 360
+    return angle
+
+
 def nums_to_angle(nums):
     angle = 0
-    return angle
+    base_angle = 30
+    angle=sum(nums)*base_angle
+    return normalization(angle)
 
 
 def angles_to_nums(angles):
