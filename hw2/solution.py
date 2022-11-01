@@ -13,7 +13,7 @@
 """
 
 
-def get_letter(num,count):
+def get_letter(num, count):
     nums_chars = {-1: ('',),
                   1: ('',),
                   2: ('A', 'B', 'C'),
@@ -63,6 +63,42 @@ def nums_to_text(nums):
 
 def text_to_nums(text):
     nums = []
+    char_nums = {'': (1,),
+                 ' ': (0,),
+                 'A': (2,),
+                 'B': (2, 2),
+                 'C': (2, 2, 2),
+                 'D': (3,),
+                 'E': (3, 3),
+                 'F': (3, 3, 3),
+                 'G': (4,),
+                 'H': (4, 4),
+                 'I': (4, 4, 4),
+                 'J': (5,),
+                 'K': (5, 5),
+                 'L': (5, 5, 5),
+                 'M': (6,),
+                 'N': (6, 6),
+                 'O': (6, 6, 6),
+                 'P': (7,),
+                 'Q': (7, 7),
+                 'R': (7, 7, 7),
+                 'S': (7, 7, 7, 7),
+                 'T': (8,),
+                 'U': (8, 8),
+                 'V': (8, 8, 8),
+                 'W': (9,),
+                 'X': (9, 9),
+                 'Y': (9, 9, 9),
+                 'Z': (9, 9, 9, 9)
+                 }
+    previous = ''
+    for ch in text:
+        if char_nums[ch.upper()][-1] == char_nums[previous.upper()][0]:
+            nums.append(-1)
+        for n in char_nums[ch.upper()]:
+            nums.append(n)
+        previous = ch
     return nums
 
 

@@ -27,7 +27,6 @@ class TestNumsToText(unittest.TestCase):
         self.assertEqual(nums_to_text([2, 2, 1, 1, 2, 1]), 'BA')
 
 
-'''
 class TestTextToNums(unittest.TestCase):
     """Test the text_to_nums function."""
 
@@ -35,6 +34,17 @@ class TestTextToNums(unittest.TestCase):
         """Sanity test for a single letter."""
         self.assertEqual(text_to_nums('a'), [2])
 
+    def test_hello(self):
+        self.assertEqual(text_to_nums('hello'), [4, 4, 3, 3, 5, 5, 5, -1, 5, 5, 5, 6, 6, 6])
+
+    def test_python(self):
+        self.assertEqual(text_to_nums('PyThon'), [7, 9, 9, 9, 8, 4, 4, 6, 6, 6, -1, 6, 6])
+
+    def test_interval(self):
+        self.assertEqual(text_to_nums('asl pls'), [2, 7, 7, 7, 7, 5, 5, 5, 0, 7, 5, 5, 5, 7, 7, 7, 7])
+
+
+'''       
 
 class TestNumsToAngles(unittest.TestCase):
     """Test the nums_to_angle function."""
