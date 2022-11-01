@@ -20,6 +20,9 @@ class TestNumsToText(unittest.TestCase):
     def test_single_letter(self):
         self.assertEqual(nums_to_text([2, 2, 2, 2, 2, 2, 2, 2]), 'B')
 
+    def test_interval(self):
+        self.assertEqual(nums_to_text([2, 2, 0, 1, 3, 3]), 'B E')
+
 
 '''
 class TestTextToNums(unittest.TestCase):

@@ -35,8 +35,9 @@ def nums_to_text(nums):
     c = 0
     previous = 1
     for n in nums:
-        if n == 1:
-            pass
+        if n == 1:  # we need to add the previous letter
+            text += get_letter(previous, c)
+            c = 0
         elif n == -1:
             # if c != 0:
             # print(f"We are on {n} and c={c}")
