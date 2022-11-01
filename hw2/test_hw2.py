@@ -23,6 +23,9 @@ class TestNumsToText(unittest.TestCase):
     def test_interval(self):
         self.assertEqual(nums_to_text([2, 2, 0, 1, 3, 3]), 'B E')
 
+    def test_pass(self):
+        self.assertEqual(nums_to_text([2, 2, 1, 1, 2, 1]), 'BA')
+
 
 '''
 class TestTextToNums(unittest.TestCase):
