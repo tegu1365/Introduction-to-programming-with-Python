@@ -58,6 +58,12 @@ class TestTextToNums(unittest.TestCase):
     def test_multi_letter(self):
         self.assertEqual(text_to_nums('aAaA Bbb'), [2, -1, 2, -1, 2, -1, 2, 0, 2, 2, -1, 2, 2, -1, 2, 2])
 
+    def test_spaces(self):
+        """Test with multiple spaces"""
+        self.assertEqual(text_to_nums('foo    bar    baz'),
+                         [3, 3, 3, 6, 6, 6, -1, 6, 6, 6, 0, -1, 0, -1, 0, -1, 0, 2, 2, -1, 2, 7, 7, 7, 0, -1, 0, -1, 0,
+                          -1, 0, 2, 2, -1, 2, 9, 9, 9, 9])
+
 
 class TestNumsToAngles(unittest.TestCase):
     """Test the nums_to_angle function."""
