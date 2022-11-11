@@ -19,8 +19,17 @@ class Card:
 class Deck:
 
     def __init__(self, face_filter=None):
+        cards = []
         if face_filter is not None:
-            cards = []
             for face in face_filter:
                 for s in suits:
                     cards.append(Card(s, face))
+
+    def cut(self):
+        pass
+
+    def shuffle(self):
+        pass
+
+    def get_cards(self):
+        pass
