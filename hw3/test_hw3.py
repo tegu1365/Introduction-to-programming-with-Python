@@ -1,6 +1,6 @@
 import unittest
 
-from solution import Card, Deck  # , Player, Game, Belot, Poker
+from solution import Card, Deck, Player, Game#, Belot, Poker
 
 
 class TestCard(unittest.TestCase):
