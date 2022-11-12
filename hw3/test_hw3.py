@@ -23,6 +23,18 @@ class TestDeck(unittest.TestCase):
         self.assertTrue(hasattr(deck, 'shuffle'))
         self.assertTrue(hasattr(deck, 'get_cards'))
 
+    def test_deck_with_8_cards(self):
+        deck = Deck(['A', 'K'])
+        self.assertTrue(deck.get_cards(), [Card('clubs', 'A'), Card('diamonds', 'A'), Card('hearts', 'A'), Card('spades', 'A'),
+                                           Card('clubs', 'K'), Card('diamonds', 'K'), Card('hearts', 'K'), Card('spades', 'K')])
+
+        '''print("_______________________________________________________")
+        deck.shuffle()
+        deck.get_cards()
+        print("_______________________________________________________")
+        deck.cut()
+        deck.get_cards()'''
+
 '''
 class TestPlayer(unittest.TestCase):
     """Test the Player class."""
