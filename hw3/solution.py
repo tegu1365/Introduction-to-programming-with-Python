@@ -19,10 +19,9 @@ class Card:
 
 
 class Deck:
-    cards = []
 
     def __init__(self, face_filter=None):
-
+        self.cards = []
         if face_filter is not None:
             for face in face_filter:
                 for s in suits:
@@ -41,6 +40,21 @@ class Deck:
         shuffle(self.cards)
 
     def get_cards(self):
-        for c in self.cards:
-            print(c.get_face() + ": " + c.get_suit())
+        """ for c in self.cards:
+             print(c.get_face() + ": " + c.get_suit())"""
         return self.cards
+
+
+class PLayer:
+
+    def __init__(self):
+        self.cards = Deck()
+
+    def get_cards(self):
+        return self.cards.get_cards()
+
+class Game:
+    def __init__(self, number_of_players, dealing_direction, dealing_instructions):
+        self.number_of_players = number_of_players
+        self.dealing_direction = dealing_direction
+        self.dealing_instructions = dealing_instructions
