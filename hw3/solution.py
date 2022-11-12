@@ -1,5 +1,5 @@
 from random import randint, shuffle
-
+faces = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 suits = ['clubs', 'diamonds', 'hearts', 'spades']
 
 
@@ -93,7 +93,12 @@ class Game:
         self.deck.cut()
 
     def deal(self, start_player):
-        pass
+        st_ind = self.players.index(start_player)
+
+        if self.dealing_direction == 'ltr':
+            self.players.reverse()
+
+
 
     def get_deck(self):
         return self.deck
