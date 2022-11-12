@@ -35,7 +35,7 @@ class TestDeck(unittest.TestCase):
         deck.cut()
         deck.get_cards()'''
 
-'''
+
 class TestPlayer(unittest.TestCase):
     """Test the Player class."""
 
@@ -56,7 +56,7 @@ class TestGame(unittest.TestCase):
         self.assertTrue(hasattr(game, 'deal'))
         self.assertTrue(hasattr(game, 'get_deck'))
 
-
+'''
 class TestBelot(unittest.TestCase):
     """Test the Belot class."""
 

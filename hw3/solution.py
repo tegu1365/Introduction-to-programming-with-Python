@@ -44,6 +44,13 @@ class Deck:
              print(c.get_face() + ": " + c.get_suit())"""
         return self.cards
 
+    def add_card(self,card):
+        self.cards.append(card)
+
+    def deal_card(self):
+        card = self.cards[-1]
+        self.cards.remove(card)
+        return card
 
 class PLayer:
 
@@ -53,8 +60,39 @@ class PLayer:
     def get_cards(self):
         return self.cards.get_cards()
 
+    def add_card(self, card):
+        self.cards.add_card(card)
+
+    def give_card(self,card):
+        self.cards.cards.remove(card)
+
+
 class Game:
     def __init__(self, number_of_players, dealing_direction, dealing_instructions):
         self.number_of_players = number_of_players
         self.dealing_direction = dealing_direction
         self.dealing_instructions = dealing_instructions
+
+        self.players = []
+        for i in range(0, number_of_players):
+            self.players.append(PLayer())
+
+        self.deck = Deck()
+
+    def get_players(self):
+        return self.players
+
+    def prepare_deck(self):
+        for p in self.players:
+            for c in p.get_cards():
+                self.deck.add_card(c)
+                p.give_card(c)
+
+        self.deck.shuffle()
+        self.deck.cut()
+
+    def deal(self):
+        pass
+
+    def get_deck(self):
+        pass
