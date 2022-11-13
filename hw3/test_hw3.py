@@ -56,6 +56,11 @@ class TestGame(unittest.TestCase):
         self.assertTrue(hasattr(game, 'deal'))
         self.assertTrue(hasattr(game, 'get_deck'))
 
+        game = Game(4, 'ltr', (1, 1))
+        game.deck = deck = Deck(['A', 'K'])
+        players = game.get_players()
+        game.deal(players[1])
+
 '''
 class TestBelot(unittest.TestCase):
     """Test the Belot class."""

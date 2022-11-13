@@ -55,8 +55,9 @@ class Deck:
 
 class Player:
 
-    def __init__(self):
+    def __init__(self, name = 'Tegu'):
         self.cards = Deck()
+        self.name = name
 
     def get_cards(self):
         return self.cards.get_cards()
@@ -67,6 +68,10 @@ class Player:
     def give_card(self, card):
         self.cards.cards.remove(card)
 
+    def print_cards(self):
+        for c in self.cards.get_cards():
+            print(" - "+c.get_face() + ": " + c.get_suit())
+
 
 class Game:
     def __init__(self, number_of_players, dealing_direction, dealing_instructions):
@@ -76,7 +81,7 @@ class Game:
 
         self.players = []
         for i in range(0, number_of_players):
-            self.players.append(Player())
+            self.players.append(Player(i))
 
         self.deck = Deck()
 
@@ -95,9 +100,29 @@ class Game:
     def deal(self, start_player):
         st_ind = self.players.index(start_player)
 
-        if self.dealing_direction == 'ltr':
-            self.players.reverse()
+        if self.dealing_direction == 'rtl':
+            before = self.players[:st_ind+1]
+            after = self.players[st_ind+1:]
+            before.reverse()
+            after.reverse()
+            self.players = before + after
+        else:
+            before = self.players[:st_ind]
+            after = self.players[st_ind:]
+            self.players = after + before
 
+        # for p in self.players:
+            # print(f"{p.name}")
+
+        for c in self.dealing_instructions:
+            for p in self.players:
+                for i in range(0, c):
+                    card = self.deck.deal_card()
+                    p.add_card(card)
+                    # print(f"Player {p.name} gets {card.face}: {card.suit}")
+
+        # for p in self.players:
+            # print(f"{p.name}: {p.print_cards()}")
 
 
     def get_deck(self):
