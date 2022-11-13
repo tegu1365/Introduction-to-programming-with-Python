@@ -1,4 +1,5 @@
 from random import randint, shuffle
+
 faces = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 suits = ['clubs', 'diamonds', 'hearts', 'spades']
 
@@ -23,6 +24,7 @@ class Deck:
     def __init__(self, face_filter=None):
         self.cards = []
         if face_filter is not None:
+           # print("Hi")
             for face in face_filter:
                 for s in suits:
                     self.cards.append(Card(s, face))
@@ -55,7 +57,7 @@ class Deck:
 
 class Player:
 
-    def __init__(self, name = 'Tegu'):
+    def __init__(self, name='Tegu'):
         self.cards = Deck()
         self.name = name
 
@@ -65,34 +67,35 @@ class Player:
     def add_card(self, card):
         self.cards.add_card(card)
 
-    def give_card(self, card):
-        self.cards.cards.remove(card)
+    def give_cards(self):
+        self.cards = Deck()
 
     def print_cards(self):
         for c in self.cards.get_cards():
-            print(" - "+c.get_face() + ": " + c.get_suit())
+            print(" - " + c.get_face() + ": " + c.get_suit())
 
 
 class Game:
+
     def __init__(self, number_of_players, dealing_direction, dealing_instructions):
         self.number_of_players = number_of_players
         self.dealing_direction = dealing_direction
         self.dealing_instructions = dealing_instructions
-
+        self.deck = Deck()
         self.players = []
         for i in range(0, number_of_players):
             self.players.append(Player(i))
-
-        self.deck = Deck()
 
     def get_players(self):
         return self.players
 
     def prepare_deck(self):
         for p in self.players:
-            for c in p.get_cards():
+            cards = p.get_cards()
+            for c in cards:
+                # print(f"getting card: {c.face}: {c.suit} from player {p.name}")
                 self.deck.add_card(c)
-                p.give_card(c)
+            p.give_cards()
 
         self.deck.shuffle()
         self.deck.cut()
@@ -101,8 +104,8 @@ class Game:
         st_ind = self.players.index(start_player)
 
         if self.dealing_direction == 'rtl':
-            before = self.players[:st_ind+1]
-            after = self.players[st_ind+1:]
+            before = self.players[:st_ind + 1]
+            after = self.players[st_ind + 1:]
             before.reverse()
             after.reverse()
             self.players = before + after
@@ -112,18 +115,32 @@ class Game:
             self.players = after + before
 
         # for p in self.players:
-            # print(f"{p.name}")
+        # print(f"{p.name}")
 
-        for c in self.dealing_instructions:
+        for d in self.dealing_instructions:
             for p in self.players:
-                for i in range(0, c):
+                for i in range(0, d):
                     card = self.deck.deal_card()
                     p.add_card(card)
                     # print(f"Player {p.name} gets {card.face}: {card.suit}")
 
         # for p in self.players:
-            # print(f"{p.name}: {p.print_cards()}")
-
+        # print(f"{p.name}: {p.print_cards()}")
 
     def get_deck(self):
         return self.deck
+
+
+class Belot(Game):
+    def __init__(self):
+        super().__init__(number_of_players = 4, dealing_direction = 'ltr', dealing_instructions = (2, 3, 3))
+        self.deck = Deck(['7', '8', '9', '10', 'J', 'Q', 'K', 'A'])
+
+        #for c in self.deck.get_cards():
+         #   print(f"{c.get_face}: {c.get_suit}")
+
+
+class Poker(Game):
+    def __init__(self):
+        super().__init__(number_of_players = 9, dealing_direction = 'rtl', dealing_instructions = (1, 1, 1, 1, 1))
+        self.deck = Deck(faces)

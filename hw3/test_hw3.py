@@ -1,6 +1,6 @@
 import unittest
 
-from solution import Card, Deck, Player, Game#, Belot, Poker
+from solution import Card, Deck, Player, Game, Belot, Poker
 
 
 class TestCard(unittest.TestCase):
@@ -25,8 +25,9 @@ class TestDeck(unittest.TestCase):
 
     def test_deck_with_8_cards(self):
         deck = Deck(['A', 'K'])
-        self.assertTrue(deck.get_cards(), [Card('clubs', 'A'), Card('diamonds', 'A'), Card('hearts', 'A'), Card('spades', 'A'),
-                                           Card('clubs', 'K'), Card('diamonds', 'K'), Card('hearts', 'K'), Card('spades', 'K')])
+        self.assertTrue(deck.get_cards(),
+                        [Card('clubs', 'A'), Card('diamonds', 'A'), Card('hearts', 'A'), Card('spades', 'A'),
+                         Card('clubs', 'K'), Card('diamonds', 'K'), Card('hearts', 'K'), Card('spades', 'K')])
 
         '''print("_______________________________________________________")
         deck.shuffle()
@@ -57,11 +58,11 @@ class TestGame(unittest.TestCase):
         self.assertTrue(hasattr(game, 'get_deck'))
 
         game = Game(4, 'ltr', (1, 1))
-        game.deck = deck = Deck(['A', 'K'])
+        game.deck = Deck(['A', 'K'])
         players = game.get_players()
         game.deal(players[1])
 
-'''
+
 class TestBelot(unittest.TestCase):
     """Test the Belot class."""
 
@@ -69,6 +70,16 @@ class TestBelot(unittest.TestCase):
         """Sanity test for the Belot class."""
         belot = Belot()
         self.assertIsInstance(belot, Game)
+        players = belot.get_players()
+        ''' for c in belot.get_deck().get_cards():
+            print(f"{c.get_face()}: {c.get_suit()}")'''
+        belot.prepare_deck()
+        belot.deal(players[0])
+        # Play the game, argue about the rules, curse, fight, argue about who should deal the cards during second round...
+        belot.prepare_deck()
+        '''for c in belot.get_deck().get_cards():
+            print(f"{c.get_face()}: {c.get_suit()}")'''
+        belot.deal(players[1])
 
 
 class TestPoker(unittest.TestCase):
@@ -79,7 +90,6 @@ class TestPoker(unittest.TestCase):
         poker = Poker()
         self.assertIsInstance(poker, Game)
 
-'''
 
 if __name__ == '__main__':
     unittest.main()
