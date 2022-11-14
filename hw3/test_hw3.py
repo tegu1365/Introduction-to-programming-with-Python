@@ -57,10 +57,16 @@ class TestGame(unittest.TestCase):
         self.assertTrue(hasattr(game, 'deal'))
         self.assertTrue(hasattr(game, 'get_deck'))
 
-        game = Game(4, 'ltr', (1, 1))
-        game.deck = Deck(['A', 'K'])
-        players = game.get_players()
-        game.deal(players[1])
+        # print(len(game.get_deck().get_cards()))
+
+        # print("__________________________________________")
+        game1 = Game(4, 'ltr', (1, 1))
+        # print(len(game1.get_deck().get_cards()))
+        # print("__________________________________________")
+        game1.deck = Deck(['A', 'K'])
+        # print(len(game1.get_deck().get_cards()))
+        players = game1.get_players()
+        game1.deal(players[1])
 
 
 class TestBelot(unittest.TestCase):
@@ -71,14 +77,15 @@ class TestBelot(unittest.TestCase):
         belot = Belot()
         self.assertIsInstance(belot, Game)
         players = belot.get_players()
-        ''' for c in belot.get_deck().get_cards():
-            print(f"{c.get_face()}: {c.get_suit()}")'''
+        for c in belot.get_deck().get_cards():
+            print(f"{c.get_face()}: {c.get_suit()}")
         belot.prepare_deck()
         belot.deal(players[0])
         # Play the game, argue about the rules, curse, fight, argue about who should deal the cards during second round...
         belot.prepare_deck()
-        '''for c in belot.get_deck().get_cards():
-            print(f"{c.get_face()}: {c.get_suit()}")'''
+        print("____________________________________")
+        for c in belot.get_deck().get_cards():
+            print(f"{c.get_face()}: {c.get_suit()}")
         belot.deal(players[1])
 
 

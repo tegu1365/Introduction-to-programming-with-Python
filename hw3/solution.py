@@ -7,33 +7,40 @@ suits = ['clubs', 'diamonds', 'hearts', 'spades']
 class Card:
 
     def __init__(self, suit, face):
-        ''' Define card with suit:  'clubs', 'diamonds', 'hearts', 'spades' and face:  '2',...'9', '10', 'J', 'Q',
-        'K' или 'A' '''
-        self.suit = suit
-        self.face = face
+        """ Define card with suit:  'clubs', 'diamonds', 'hearts', 'spades' and face:  '2',...'9', '10', 'J', 'Q',
+        'K' или 'A' """
+        self._suit = suit
+        self._face = face
 
     def get_suit(self):
-        return self.suit
+        return self._suit
 
     def get_face(self):
-        return self.face
+        return self._face
 
 
 class Deck:
 
     def __init__(self, face_filter=None):
+        """I'm using Deck as a container for cards when new Game is initialize then it creates full deck of 52 cards,
+        and when new Player is initialized his Deck is empty until cards are added. """
+
         self.cards = []
         if face_filter is not None:
-           # print("Hi")
+            # print("Hi")
             for face in face_filter:
-                for s in suits:
-                    self.cards.append(Card(s, face))
+                for suit in suits:
+                    self.cards.append(Card(suit, face))
+        '''else:
+            for face in faces:
+                for suit in suits:
+                    self.cards.append(Card(suit, face))'''
 
         '''for c in self.cards:
             print(c.get_face() + ": " + c.get_suit())'''
 
     def cut(self):
-        index = randint(1, len(self.cards))
+        index = randint(1, len(self.cards) - 1)
         first_half = self.cards[:index]
         second_half = self.cards[index:]
         self.cards = second_half + first_half
@@ -42,24 +49,22 @@ class Deck:
         shuffle(self.cards)
 
     def get_cards(self):
-        """ for c in self.cards:
-             print(c.get_face() + ": " + c.get_suit())"""
+        ''' for c in self.cards:
+            print(c.get_face() + ": " + c.get_suit())'''
         return self.cards
 
     def add_card(self, card):
         self.cards.append(card)
 
     def deal_card(self):
-        card = self.cards[-1]
-        self.cards.remove(card)
-        return card
+        return self.cards.pop()
 
 
 class Player:
 
-    def __init__(self, name='Tegu'):
+    def __init__(self):
         self.cards = Deck()
-        self.name = name
+        # self.name = name
 
     def get_cards(self):
         return self.cards.get_cards()
@@ -81,10 +86,10 @@ class Game:
         self.number_of_players = number_of_players
         self.dealing_direction = dealing_direction
         self.dealing_instructions = dealing_instructions
-        self.deck = Deck()
+        self.deck = Deck(faces)
         self.players = []
-        for i in range(0, number_of_players):
-            self.players.append(Player(i))
+        for _ in range(number_of_players):
+            self.players.append(Player())
 
     def get_players(self):
         return self.players
@@ -101,27 +106,27 @@ class Game:
         self.deck.cut()
 
     def deal(self, start_player):
-        st_ind = self.players.index(start_player)
+        start_index = self.players.index(start_player)
 
         if self.dealing_direction == 'rtl':
-            before = self.players[:st_ind + 1]
-            after = self.players[st_ind + 1:]
+            before = self.players[:start_index + 1]
+            after = self.players[start_index + 1:]
             before.reverse()
             after.reverse()
             self.players = before + after
         else:
-            before = self.players[:st_ind]
-            after = self.players[st_ind:]
+            before = self.players[:start_index]
+            after = self.players[start_index:]
             self.players = after + before
 
         # for p in self.players:
         # print(f"{p.name}")
 
-        for d in self.dealing_instructions:
-            for p in self.players:
-                for i in range(0, d):
+        for deal_turn in self.dealing_instructions:
+            for player in self.players:
+                for _ in range(deal_turn):
                     card = self.deck.deal_card()
-                    p.add_card(card)
+                    player.add_card(card)
                     # print(f"Player {p.name} gets {card.face}: {card.suit}")
 
         # for p in self.players:
@@ -133,14 +138,14 @@ class Game:
 
 class Belot(Game):
     def __init__(self):
-        super().__init__(number_of_players = 4, dealing_direction = 'ltr', dealing_instructions = (2, 3, 3))
+        super().__init__(number_of_players=4, dealing_direction='ltr', dealing_instructions=(2, 3, 3))
         self.deck = Deck(['7', '8', '9', '10', 'J', 'Q', 'K', 'A'])
 
-        #for c in self.deck.get_cards():
-         #   print(f"{c.get_face}: {c.get_suit}")
+        '''for c in self.deck.get_cards():
+            print(f"{c.get_face}: {c.get_suit}")'''
 
 
 class Poker(Game):
     def __init__(self):
-        super().__init__(number_of_players = 9, dealing_direction = 'rtl', dealing_instructions = (1, 1, 1, 1, 1))
+        super().__init__(number_of_players=9, dealing_direction='rtl', dealing_instructions=(1, 1, 1, 1, 1))
         self.deck = Deck(faces)
