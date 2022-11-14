@@ -22,8 +22,6 @@ class Card:
 class Deck:
 
     def __init__(self, face_filter=None):
-        """I'm using Deck as a container for cards when new Game is initialize then it creates full deck of 52 cards,
-        and when new Player is initialized his Deck is empty until cards are added. """
 
         self.cards = []
         if face_filter is not None:
@@ -31,10 +29,10 @@ class Deck:
             for face in face_filter:
                 for suit in suits:
                     self.cards.append(Card(suit, face))
-        '''else:
+        else:
             for face in faces:
                 for suit in suits:
-                    self.cards.append(Card(suit, face))'''
+                    self.cards.append(Card(suit, face))
 
         '''for c in self.cards:
             print(c.get_face() + ": " + c.get_suit())'''
@@ -63,20 +61,20 @@ class Deck:
 class Player:
 
     def __init__(self):
-        self.cards = Deck()
+        self.cards = []
         # self.name = name
 
     def get_cards(self):
-        return self.cards.get_cards()
+        return self.cards
 
     def add_card(self, card):
-        self.cards.add_card(card)
+        self.cards.append(card)
 
     def give_cards(self):
-        self.cards = Deck()
+        self.cards = []
 
     def print_cards(self):
-        for c in self.cards.get_cards():
+        for c in self.cards:
             print(" - " + c.get_face() + ": " + c.get_suit())
 
 
