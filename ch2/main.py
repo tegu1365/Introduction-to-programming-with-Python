@@ -77,13 +77,13 @@ def encrypt_message(type_of_encrytion):
     def decorator(func):
         def encryption(*arg, **kwargs):
             if type_of_encrytion == 'ROT-13':
-                print('rot-13 encrypt: ')
+                # print('rot-13 encrypt: ')
                 return rot_13(func(*arg, **kwargs))
             elif type_of_encrytion == 'ATBASH':
-                print('atbash encrypt: ')
+                # print('atbash encrypt: ')
                 return atbash(func(*arg, **kwargs))
             elif type_of_encrytion == 'FN-XOR':
-                print('fn-xor encrypt: ')
+                # print('fn-xor encrypt: ')
                 return fn_xor(func(*arg, **kwargs))
 
         return encryption
