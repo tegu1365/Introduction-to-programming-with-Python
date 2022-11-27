@@ -55,6 +55,23 @@ class TestChessPosition(unittest.TestCase):
         the_exception = cm.exception
         self.assertEqual(the_exception.__str__(), 'kings')
 
+    def test_len_function(self):
+        init_pos = ChessPosition('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR')
+        self.assertEqual(len(init_pos), 32)
+        figure_4 = ChessPosition("1k6/8/4b3/8/1K4p1/3R4/8/8")
+        self.assertEqual(len(figure_4), 5)
+
+    def test_str_func(self):
+        init_pos = ChessPosition('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR')
+        self.assertEqual(init_pos.__str__(), 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR')
+
+    def test_get_figure(self):
+        init_pos = ChessPosition('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR')
+        self.assertEqual(init_pos['E2'], 'P')
+        self.assertEqual(init_pos['H8'], 'r')
+        self.assertEqual(init_pos['A6'], None)
+
+
 
 if __name__ == '__main__':
     unittest.main()

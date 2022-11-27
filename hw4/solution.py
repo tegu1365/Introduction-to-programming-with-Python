@@ -12,6 +12,7 @@ class ChessPosition:
     def __init__(self, fen):
         self.fen = fen
         self.chest_board = []
+        self.number_of_figures = 0
         self.create_chess_board()
         flag_kings, flag_pawns = 0, 0
         white_kings, black_kings = 0, 0
@@ -52,6 +53,7 @@ class ChessPosition:
                         new_string += '_'
                 else:
                     new_string += y
+                    self.number_of_figures += 1
             # print(new_string)
             new_chess_board.append(new_string)
         self.chest_board = new_chess_board
@@ -100,3 +102,17 @@ class ChessPosition:
 
     def is_equal(self):
         pass
+
+    def __str__(self):
+        return self.fen
+
+    def __len__(self):
+        return self.number_of_figures
+
+    def __getitem__(self, key):
+        """A=1 B=2 C=3 D=4 E=5 F=6 G=7 H=8"""
+        key = key.upper()
+        indexes = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
+        # print(f'{(key[1],key[0])}')
+        item = self.chest_board[-(int(key[1]))][indexes[key[0]]]
+        return None if item == '_' else item
