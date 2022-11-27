@@ -49,6 +49,12 @@ class TestChessPosition(unittest.TestCase):
         the_exception = cm.exception
         self.assertEqual(the_exception.__str__(), 'pawns')
 
+    def test_raises_multiple_exceptions(self):
+        with self.assertRaises(ChessException) as cm:
+            ChessPosition('knbqpbnr/p1p2ppp/2p5/8/3P4/4K3/PPPK1PPP/RNBQ1BNR')
+        the_exception = cm.exception
+        self.assertEqual(the_exception.__str__(), 'kings')
+
 
 if __name__ == '__main__':
     unittest.main()

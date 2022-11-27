@@ -13,27 +13,31 @@ class ChessPosition:
         self.fen = fen
         self.chest_board = []
         self.create_chess_board()
-        flag = 0
+        flag_kings, flag_pawns = 0, 0
         white_kings, black_kings = 0, 0
         i, j = 0, 0
         for x in self.chest_board:
             for y in x:
                 if y == 'K' or y == 'k':
                     if self.king_validate(i, j):
-                        raise ChessException("kings")
+                        flag_kings = 1
                     if y == 'K':
                         white_kings += 1
                     if y == 'k':
                         black_kings += 1
                 if i == 0 or i == 7:
                     if y == 'p' or y == 'P':
-                        raise ChessException("pawns")
+                        flag_pawns = 1
                 j += 1
             i += 1
             j = 0
-
         if white_kings != 1 or black_kings != 1:
+            flag_kings = 1
+
+        if flag_kings:
             raise ChessException("kings")
+        elif flag_pawns:
+            raise ChessException("pawns")
 
     def create_chess_board(self):
         self.chest_board = self.fen.split("/")
@@ -58,7 +62,8 @@ class ChessPosition:
             if self.chest_board[index_x][index_y - 1] == 'K' or self.chest_board[index_x][index_y - 1] == 'k':
                 return 1
             if index_x != 7:
-                if self.chest_board[index_x + 1][index_y - 1] == 'K' or self.chest_board[index_x + 1][index_y - 1] == 'k':
+                if self.chest_board[index_x + 1][index_y - 1] == 'K' or self.chest_board[index_x + 1][
+                    index_y - 1] == 'k':
                     return 1
         if index_x != 0 and index_y != 0:
             if self.chest_board[index_x - 1][index_y - 1] == 'K' or self.chest_board[index_x - 1][index_y - 1] == 'k':
@@ -67,7 +72,8 @@ class ChessPosition:
             if self.chest_board[index_x - 1][index_y] == 'K' or self.chest_board[index_x - 1][index_y] == 'k':
                 return 1
             if index_y != 7:
-                if self.chest_board[index_x - 1][index_y + 1] == 'K' or self.chest_board[index_x - 1][index_y + 1] == 'k':
+                if self.chest_board[index_x - 1][index_y + 1] == 'K' or self.chest_board[index_x - 1][
+                    index_y + 1] == 'k':
                     return 1
         if index_y != 7:
             if self.chest_board[index_x][index_y + 1] == 'K' or self.chest_board[index_x][index_y + 1] == 'k':
