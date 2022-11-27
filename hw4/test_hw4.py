@@ -11,12 +11,13 @@ class TestChessException(unittest.TestCase):
         exception = ChessException('Paul Morphy')
 
 
-# class TestChessScore(unittest.TestCase):
-#     """Test the ChessScore class."""
-#
-#     def test_simple_init(self):
-#         """Sanity test for the ChessScore class."""
-#         score = ChessScore(['p'])
+class TestChessScore(unittest.TestCase):
+    """Test the ChessScore class."""
+
+    def test_simple_init(self):
+        """Sanity test for the ChessScore class."""
+        score = ChessScore(['p'])
+        self.assertEqual(score, 1)
 
 
 class TestChessPosition(unittest.TestCase):
@@ -71,6 +72,18 @@ class TestChessPosition(unittest.TestCase):
         self.assertEqual(init_pos['H8'], 'r')
         self.assertEqual(init_pos['A6'], None)
 
+    def test_get_score(self):
+        figure_4 = ChessPosition("8/2k5/8/8/1P3N2/8/4K3/8")
+        self.assertEqual(figure_4.get_black_score(), 4)
+        self.assertEqual(figure_4.get_white_score(), 4 + 1 + 3)
+
+    def test_score_is_equal(self):
+        figure_4 = ChessPosition("8/2k5/8/8/1P3N2/8/4K3/8")
+        init_pos = ChessPosition('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR')
+        self.assertTrue(init_pos.is_equal())
+        self.assertFalse(figure_4.is_equal())
+        self.assertTrue(figure_4.white_is_winning())
+        self.assertFalse(figure_4.black_is_winning())
 
 
 if __name__ == '__main__':

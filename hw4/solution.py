@@ -7,6 +7,43 @@ class ChessException(Exception):
         return f'{self.text}'
 
 
+class ChessScore:
+    _points = {'r': 5, 'n': 3, 'b': 3, 'q': 9, 'k': 4, 'p': 1, '_': 0}
+
+    def __init__(self, figures):
+        self.figures = figures
+        self.score = 0
+        for figure in figures:
+            self.score += self._points[figure]
+
+    def __int__(self):
+        return self.score
+
+    def __add__(self, other):
+        return self.score + int(other)
+
+    def __sub__(self, other):
+        return self.score - int(other)
+
+    def __eq__(self, other):
+        return self.score == int(other)
+
+    def __ne__(self, other):
+        return self.score != int(other)
+
+    def __gt__(self, other):
+        return self.score > int(other)
+
+    def __ge__(self, other):
+        return self.score >= int(other)
+
+    def __lt__(self, other):
+        return self.score < int(other)
+
+    def __le__(self, other):
+        return self.score <= int(other)
+
+
 class ChessPosition:
 
     def __init__(self, fen):
@@ -89,19 +126,29 @@ class ChessPosition:
         return 0
 
     def get_white_score(self):
-        pass
+        white_figures = []
+        for x in self.fen:
+            if 'A' <= x <= 'Z':
+                white_figures.append(x.lower())
+
+        return ChessScore(white_figures)
 
     def get_black_score(self):
-        pass
+        black_figures = []
+        for x in self.fen:
+            if 'a' <= x <= 'z':
+                black_figures.append(x)
+
+        return ChessScore(black_figures)
 
     def white_is_winning(self):
-        pass
+        return self.get_black_score() < self.get_white_score()
 
     def black_is_winning(self):
-        pass
+        return self.get_black_score() > self.get_white_score()
 
     def is_equal(self):
-        pass
+        return self.get_black_score() == self.get_white_score()
 
     def __str__(self):
         return self.fen
