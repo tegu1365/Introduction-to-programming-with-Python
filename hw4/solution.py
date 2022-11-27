@@ -14,7 +14,7 @@ class ChessScore:
         self.figures = figures
         self.score = 0
         for figure in figures:
-            self.score += self._points[figure]
+            self.score += self._points[figure.lower()]
 
     def __int__(self):
         return self.score

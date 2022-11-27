@@ -17,7 +17,14 @@ class TestChessScore(unittest.TestCase):
     def test_simple_init(self):
         """Sanity test for the ChessScore class."""
         score = ChessScore(['p'])
-        self.assertEqual(score, 1)
+        self.assertEqual(int(score), 1)
+
+    def test_simple_statements(self):
+        score_1 = ChessScore(['p'])
+        score_2 = ChessScore(['p', 'k'])
+        self.assertTrue(score_1 < score_2)
+        self.assertFalse(score_1 >= score_2)
+        self.assertFalse(score_1 == score_2)
 
 
 class TestChessPosition(unittest.TestCase):
