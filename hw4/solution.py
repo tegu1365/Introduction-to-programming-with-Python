@@ -48,13 +48,16 @@ class ChessPosition:
 
     def __init__(self, fen):
         self.fen = fen
-        self.chest_board = []
+        self.chess_board = []
         self.number_of_figures = 0
         self.create_chess_board()
+        self.validation()
+
+    def validation(self):
         flag_kings, flag_pawns = 0, 0
         white_kings, black_kings = 0, 0
         i, j = 0, 0
-        for x in self.chest_board:
+        for x in self.chess_board:
             for y in x:
                 if y == 'K' or y == 'k':
                     if self.king_validate(i, j):
@@ -78,10 +81,10 @@ class ChessPosition:
             raise ChessException("pawns")
 
     def create_chess_board(self):
-        self.chest_board = self.fen.split("/")
+        self.chess_board = self.fen.split("/")
         # print(self.chest_board)
         new_chess_board = []
-        for x in self.chest_board:
+        for x in self.chess_board:
             new_string = ''
             for y in x:
                 num = ord(y) - ord('0')
@@ -93,35 +96,35 @@ class ChessPosition:
                     self.number_of_figures += 1
             # print(new_string)
             new_chess_board.append(new_string)
-        self.chest_board = new_chess_board
+        self.chess_board = new_chess_board
         # print(self.chest_board)
 
     def king_validate(self, index_x, index_y):
         if index_y != 0:
-            if self.chest_board[index_x][index_y - 1] == 'K' or self.chest_board[index_x][index_y - 1] == 'k':
+            if self.chess_board[index_x][index_y - 1] == 'K' or self.chess_board[index_x][index_y - 1] == 'k':
                 return 1
             if index_x != 7:
-                if self.chest_board[index_x + 1][index_y - 1] == 'K' or self.chest_board[index_x + 1][
+                if self.chess_board[index_x + 1][index_y - 1] == 'K' or self.chess_board[index_x + 1][
                     index_y - 1] == 'k':
                     return 1
         if index_x != 0 and index_y != 0:
-            if self.chest_board[index_x - 1][index_y - 1] == 'K' or self.chest_board[index_x - 1][index_y - 1] == 'k':
+            if self.chess_board[index_x - 1][index_y - 1] == 'K' or self.chess_board[index_x - 1][index_y - 1] == 'k':
                 return 1
         if index_x != 0:
-            if self.chest_board[index_x - 1][index_y] == 'K' or self.chest_board[index_x - 1][index_y] == 'k':
+            if self.chess_board[index_x - 1][index_y] == 'K' or self.chess_board[index_x - 1][index_y] == 'k':
                 return 1
             if index_y != 7:
-                if self.chest_board[index_x - 1][index_y + 1] == 'K' or self.chest_board[index_x - 1][
+                if self.chess_board[index_x - 1][index_y + 1] == 'K' or self.chess_board[index_x - 1][
                     index_y + 1] == 'k':
                     return 1
         if index_y != 7:
-            if self.chest_board[index_x][index_y + 1] == 'K' or self.chest_board[index_x][index_y + 1] == 'k':
+            if self.chess_board[index_x][index_y + 1] == 'K' or self.chess_board[index_x][index_y + 1] == 'k':
                 return 1
         if index_y != 7 and index_x != 7:
-            if self.chest_board[index_x + 1][index_y + 1] == 'K' or self.chest_board[index_x + 1][index_y + 1] == 'k':
+            if self.chess_board[index_x + 1][index_y + 1] == 'K' or self.chess_board[index_x + 1][index_y + 1] == 'k':
                 return 1
         if index_x != 7:
-            if self.chest_board[index_x + 1][index_y] == 'K' or self.chest_board[index_x + 1][index_y] == 'k':
+            if self.chess_board[index_x + 1][index_y] == 'K' or self.chess_board[index_x + 1][index_y] == 'k':
                 return 1
         return 0
 
@@ -129,7 +132,7 @@ class ChessPosition:
         white_figures = []
         for x in self.fen:
             if 'A' <= x <= 'Z':
-                white_figures.append(x.lower())
+                white_figures.append(x)
 
         return ChessScore(white_figures)
 
@@ -161,5 +164,5 @@ class ChessPosition:
         key = key.upper()
         indexes = {'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4, 'F': 5, 'G': 6, 'H': 7}
         # print(f'{(key[1],key[0])}')
-        item = self.chest_board[-(int(key[1]))][indexes[key[0]]]
+        item = self.chess_board[-(int(key[1]))][indexes[key[0]]]
         return None if item == '_' else item
